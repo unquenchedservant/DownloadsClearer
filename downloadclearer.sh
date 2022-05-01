@@ -92,9 +92,6 @@ fi
 # Months
 if [[ "$months" -eq 0 ]]
 then
-    cmonths="1" 
-elif [[ "$months" -eq 1 ]]
-then
     cmonths="*"
 else
     cmonths="*/$months"
@@ -103,7 +100,7 @@ fi
 # Days
 if [[ "$days" -eq 0 ]]
 then
-    cdays="0"
+    cdays="1"
 elif [[ "$days" -eq 1 ]]
 then
     cdays="*"
@@ -133,7 +130,7 @@ else
     cminutes="*/$minutes"
 fi
 
-echo "$cminutes $chours $cdays $cmonths $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+echo "$cminutes $chours $cdays $cmonths * $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
 crontab /usr/lib/dlClear/mycron
 
 
