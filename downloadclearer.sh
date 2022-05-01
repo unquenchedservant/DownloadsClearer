@@ -89,12 +89,43 @@ else
 fi
 #crontab -l > $HOME/.dlClear/mycron
 
-# Years
-if [[ "$years" -eq 0 ]]
+# Minutes
+if [[ "$minutes" -eq 0 ]]
 then
-    cyears="" #if years isn't specified, there's no reason to include it in the crontab 
+    cminutes="*"
+elif [[ "$minutes" -eq 1 ]]
+then
+    cminutes="*"
 else
-    cyears="? 2019/$years " #otherwise, specify it with this special string
+    cminutes="*/$minutes"
+fi
+
+# Hours
+if [[ "$hours" -eq 0 ]]
+then
+    chours="*"
+elif [[ "$hours" -eq 1 ]]
+then
+    chours="*"
+    cminutes="0"
+else
+    chours="*/$hours"
+    cminutes="0"
+fi
+
+# Days
+if [[ "$days" -eq 0 ]]
+then
+    cdays="*"
+elif [[ "$days" -eq 1 ]]
+then
+    cdays="*"
+    chours="0"
+    cminutes="0"
+else
+    cdays="*/$days"
+    chours="0"
+    cminutes="0"
 fi
 
 # Months
@@ -103,40 +134,30 @@ then
     cmonths="*"
 else
     cmonths="*/$months"
-fi
-
-# Days
-if [[ "$days" -eq 0 ]]
-then
     cdays="1"
-elif [[ "$days" -eq 1 ]]
-then
-    cdays="*"
-else
-    cdays="*/$days"
-fi
-
-# Hours
-if [[ "$hours" -eq 0 ]]
-then
     chours="0"
-elif [[ "$hours" -eq 1 ]]
-then
-    chours="*"
-else
-    chours="*/$hours"
+    cminutes="0"
 fi
 
-# Minutes
-if [[ "$minutes" -eq 0 ]]
+
+# Years
+if [[ "$years" -eq 0 ]]
 then
-    cminutes="0"
-elif [[ "$minutes" -eq 1 ]]
-then
-    cminutes="*"
+    cyears="" #if years isn't specified, there's no reason to include it in the crontab 
 else
-    cminutes="*/$minutes"
+    cyears="? 2019/$years " #otherwise, specify it with this special string
+    cmonths="1"
+    cdays="1"
+    chours="0"
+    cminutes="0"
 fi
+
+
+
+
+
+
+
 
 # if a permanent deletion, rm -rf
 # else move to trash
