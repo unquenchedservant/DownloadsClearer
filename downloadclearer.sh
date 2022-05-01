@@ -140,7 +140,7 @@ fi
 
 # if a permanent deletion, rm -rf
 # else move to trash
-if [["$permanent" -eq 1]]
+if [[ "$permanent" -eq 1 ]]
 then
     echo "$cminutes $chours $cdays $cmonths * $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
 else
