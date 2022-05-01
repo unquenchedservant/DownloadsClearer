@@ -6,8 +6,8 @@ else
     mkdir $HOME/.dlClear
     mkdir $HOME/.dlClear/logs
     wget https://raw.githubusercontent.com/unquenchedservant/DownloadsClearer/master/downloadclearer.sh
-    mv downloadclearer.sh /usr/bin/dlClear.sh
-    chmod +x /usr/bin/dlClear.sh
+    mv downloadclearer.sh /usr/bin/dlClear
+    chmod +x /usr/bin/dlClear
 fi
 
 

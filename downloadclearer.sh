@@ -79,7 +79,7 @@ else
     crontab -l > $ORIGINAL_FILE
     yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
 fi
-crontab -l > $HOME/.dlClear/mycron
+#crontab -l > $HOME/.dlClear/mycron
 
 # Years
 if [[ "$years" -eq 0 ]]
@@ -92,10 +92,10 @@ fi
 # Months
 if [[ "$months" -eq 0 ]]
 then
-    cmonths="0" 
+    cmonths="1" 
 elif [[ "$months" -eq 1 ]]
 then
-    cmonths="1"
+    cmonths="*"
 else
     cmonths="*/$months"
 fi
@@ -134,7 +134,6 @@ else
 fi
 
 echo "$cminutes $chours $cdays $cmonths $cyears rm -rf -R $HOME/Downloads/* > $HOME/.dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> $HOME/.dlClear/mycron;
-crontab $HOME/.dlClear/mycron
-rm $HOME/.dlClear/mycron
+#crontab $HOME/.dlClear/mycron
 
 
