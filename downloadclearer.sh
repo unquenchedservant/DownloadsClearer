@@ -69,8 +69,65 @@ do
             ;;
     esac
 done
-echo "Years: $years";
-echo "Months: $months";
-echo "Days: $days";
-echo "Hours: $hours";
-echo "Minutes: $minutes";
+
+ORIGINAL_FILE=$HOME/.dlClear/crontab.original
+if test -f "$ORIGINAL_FILE"; then
+    yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
+else
+    crontab -l > $ORIGINAL_FILE
+    yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
+fi
+crontab -l > $HOME/.dlClear/mycron
+
+if [[ "$years" -eq 0 ]]
+then
+    cyears="" 
+else
+    cyears="? 2019/$years"
+fi
+
+if [[ "$months" -eq 0 ]]
+then
+    cmonths="0"
+elif [[ "$months" -eq 1 ]]
+then
+    cmonths="1"
+else
+    cmonths="*/$months"
+fi
+
+if [[ "$days" -eq 0 ]]
+then
+    cdays="0"
+elif [[ "$days" -eq 1 ]]
+then
+    cdays="*"
+else
+    cdays="*/$days"
+fi
+
+if [[ "$hours" -eq 0 ]]
+then
+    chours="0"
+elif [[ "$hours" -eq 1 ]]
+then
+    chours="*"
+else
+    chours="*/$hours"
+fi
+
+if [[ "$minutes" -eq 0 ]]
+then
+    cminutes="0"
+elif [[ "$minutes" -eq 1 ]]
+then
+    cminutes="*"
+else
+    cminutes="*/$minutes"
+fi
+
+echo "$cminutes $chours $cdays $cmonths $cyears rm -rf -R $HOME/Downloads/* > $HOME/.dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> $HOME/.dlClear/mycron;
+crontab $HOME/.dlClear/mycron
+rm $HOME/.dlClear/mycron
+
+
