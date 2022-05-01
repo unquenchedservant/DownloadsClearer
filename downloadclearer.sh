@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts y:m:d:h:M flag
+while getopts y:m:d:h:i:p flag
 do
     case "${flag}" in
         y) #years
@@ -53,7 +53,7 @@ do
                 hours=0;
             fi
             ;;
-        M) #minutes
+        i) #minutes
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 59 ]]
@@ -65,6 +65,14 @@ do
                 fi
             else
                 minutes=0;
+            fi
+            ;;
+        p) #permanent
+            if [[ ${OPTARG} ]]
+            then
+                permanent=1;
+            else
+                permanent=0;
             fi
             ;;
     esac
@@ -130,7 +138,15 @@ else
     cminutes="*/$minutes"
 fi
 
-echo "$cminutes $chours $cdays $cmonths * $cyearsrm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+# if a permanent deletion, rm -rf
+# else move to trash
+if [["$permanent" -eq 1]]
+then
+    echo "$cminutes $chours $cdays $cmonths * $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+else
+    echo "$cminutes $chours $cdays $cmonths * $cyears mv $HOME/Downloads/* $HOME/.local/share/Trash/files/ > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+
 crontab /usr/lib/dlClear/mycron
+rm /usr/lib/dlClear/mycron
 
 
