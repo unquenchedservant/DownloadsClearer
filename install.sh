@@ -2,11 +2,19 @@
 
 if [ "$EUID" -ne 0 ]
     then echo "Please run as root"
+else
+    mkdir $HOME/.dlClear
+    mkdir $HOME/.dlClear/logs
+    wget https://raw.githubusercontent.com/unquenchedservant/DownloadsClearer/master/downloadclearer.sh
+    mv downloadclearer.sh /usr/bin/dlClear.sh
+    chmod +x /usr/bin/dlClear.sh
 fi
 
 
 # General install psuedocode
-# use wget to install DownloadClearer to /usr/bin/ (possible aliases: dc)
+# create ~/.dlClear folder
+# create ~/.dlClear/logs folder
+# use wget to install DownloadClearer to /usr/bin/ (possible aliases: dc, dlClear)
 # first I need to get DownloadClearer on github 
 # then chmod +x DownloadClearer
 # this actually probably needs sudo priviledges. (it does)
