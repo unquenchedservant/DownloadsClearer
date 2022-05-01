@@ -145,7 +145,7 @@ then
     echo "$cminutes $chours $cdays $cmonths * $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
 else
     echo "$cminutes $chours $cdays $cmonths * $cyears mv $HOME/Downloads/* $HOME/.local/share/Trash/files/ > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
-
+fi
 crontab /usr/lib/dlClear/mycron
 rm /usr/lib/dlClear/mycron
 
