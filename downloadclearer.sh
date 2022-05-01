@@ -86,7 +86,7 @@ if [[ "$years" -eq 0 ]]
 then
     cyears="" #if years isn't specified, there's no reason to include it in the crontab 
 else
-    cyears="? 2019/$years" #otherwise, specify it with this special string
+    cyears="? 2019/$years " #otherwise, specify it with this special string
 fi
 
 # Months
@@ -130,7 +130,7 @@ else
     cminutes="*/$minutes"
 fi
 
-echo "$cminutes $chours $cdays $cmonths * $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+echo "$cminutes $chours $cdays $cmonths * $cyearsrm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
 crontab /usr/lib/dlClear/mycron
 
 
