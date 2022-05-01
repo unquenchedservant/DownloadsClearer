@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts y:m:d:h:mi:p flag
+while getopts y:m:d:h:i:p flag
 do
     case "${flag}" in
         y) #years
@@ -53,7 +53,7 @@ do
                 hours=0;
             fi
             ;;
-        mi) #minutes
+        i) #minutes
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 59 ]]
