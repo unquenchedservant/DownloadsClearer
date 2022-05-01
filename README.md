@@ -3,9 +3,11 @@
 ## How to use
 Download install.sh from the release page
 in a terminal, do 
+
 ```chmod +x install.sh && ./install.sh```
 
 Once it's installed the command is 
+
 ```dlClear ```
 
 Use the following flags
