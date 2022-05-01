@@ -72,12 +72,12 @@ done
 
 # the following chunk checks to see if a backup of the original crontab exists
 # if it doesnt, it creates it
-ORIGINAL_FILE=$HOME/.dlClear/crontab.original
+ORIGINAL_FILE=/usr/lib/dlClear/crontab.original
 if test -f "$ORIGINAL_FILE"; then
-    yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
+    yes | cp $ORIGINAL_FILE /usr/lib/dlClear/mycron
 else
     crontab -l > $ORIGINAL_FILE
-    yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
+    yes | cp $ORIGINAL_FILE /usr/lib/dlClear/mycron
 fi
 #crontab -l > $HOME/.dlClear/mycron
 
@@ -133,7 +133,7 @@ else
     cminutes="*/$minutes"
 fi
 
-echo "$cminutes $chours $cdays $cmonths $cyears rm -rf -R $HOME/Downloads/* > $HOME/.dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> $HOME/.dlClear/mycron;
-#crontab $HOME/.dlClear/mycron
+echo "$cminutes $chours $cdays $cmonths $cyears rm -rf -R $HOME/Downloads/* > /usr/lib/dlClear/logs/\`date +%Y%m%d\%H%M\%s\`-cron.log 2>&1" >> /usr/lib/dlClear/mycron;
+crontab /usr/lib/dlClear/mycron
 
 
