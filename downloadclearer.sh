@@ -3,7 +3,7 @@
 while getopts y:m:d:h:M flag
 do
     case "${flag}" in
-        y) 
+        y) #years
             if [[ ${OPTARG} ]]
             then
                years=${OPTARG};
@@ -11,7 +11,7 @@ do
                years=0;
             fi
             ;;
-        m)
+        m) #months
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 11 ]]
@@ -25,7 +25,7 @@ do
                 months=0;
             fi
             ;;
-        d)
+        d) #days
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 6 ]]
@@ -39,7 +39,7 @@ do
                 days=0;
             fi
             ;;
-        h)
+        h) #hours
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 23 ]]
@@ -53,7 +53,7 @@ do
                 hours=0;
             fi
             ;;
-        M)
+        M) #minutes
             if [[ ${OPTARG} ]]
             then
                 if [[ ${OPTARG} -gt 59 ]]
@@ -70,6 +70,8 @@ do
     esac
 done
 
+# the following chunk checks to see if a backup of the original crontab exists
+# if it doesnt, it creates it
 ORIGINAL_FILE=$HOME/.dlClear/crontab.original
 if test -f "$ORIGINAL_FILE"; then
     yes | cp $ORIGINAL_FILE $HOME/.dlClear/mycron
@@ -79,16 +81,18 @@ else
 fi
 crontab -l > $HOME/.dlClear/mycron
 
+# Years
 if [[ "$years" -eq 0 ]]
 then
-    cyears="" 
+    cyears="" #if years isn't specified, there's no reason to include it in the crontab 
 else
-    cyears="? 2019/$years"
+    cyears="? 2019/$years" #otherwise, specify it with this special string
 fi
 
+# Months
 if [[ "$months" -eq 0 ]]
 then
-    cmonths="0"
+    cmonths="0" 
 elif [[ "$months" -eq 1 ]]
 then
     cmonths="1"
@@ -96,6 +100,7 @@ else
     cmonths="*/$months"
 fi
 
+# Days
 if [[ "$days" -eq 0 ]]
 then
     cdays="0"
@@ -106,6 +111,7 @@ else
     cdays="*/$days"
 fi
 
+# Hours
 if [[ "$hours" -eq 0 ]]
 then
     chours="0"
@@ -116,6 +122,7 @@ else
     chours="*/$hours"
 fi
 
+# Minutes
 if [[ "$minutes" -eq 0 ]]
 then
     cminutes="0"
