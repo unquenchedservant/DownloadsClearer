@@ -1,6 +1,4 @@
 # DownloadsClearer
-==
-
 
 A work in progress.
 
