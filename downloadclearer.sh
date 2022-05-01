@@ -1,5 +1,5 @@
 #!/bin/bash
-
+permanent=0
 while getopts y:m:d:h:i:p flag
 do
     case "${flag}" in
@@ -67,14 +67,7 @@ do
                 minutes=0;
             fi
             ;;
-        p) #permanent
-            if [[ ${OPTARG} ]]
-            then
-                permanent=1;
-            else
-                permanent=0;
-            fi
-            ;;
+        p) permanent=1;;
     esac
 done
 
@@ -157,7 +150,7 @@ fi
 
 
 
-
+echo "$permanent"
 
 # if a permanent deletion, rm -rf
 # else move to trash
